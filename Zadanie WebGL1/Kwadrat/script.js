@@ -3,20 +3,40 @@ const vertexShaderTxt = `
     precision mediump float;
 
     attribute vec2 vertPosition;
+    attribute vec3 vertColor;
+
+    varying vec3 vColor;
 
     void main()
     {
         gl_Position = vec4(vertPosition, 0.0, 1.0);
+        vColor = vertColor;
     }
 
 `
 
 const fragmentShaderTxt = `
+    precision mediump float;
+
+    varying vec3 vColor;
+
     void main()
     {
-        gl_FragColor = vec4(0.8, 0.3, 0.4, 1.0); // R,G,B, opacity
+        gl_FragColor = vec4(vColor, 1.0); // R,G,B, opacity
     }
 `
+
+function Generate(arrSize) {
+    string = '';
+    let r = Math.random();
+    let g = Math.random();
+    let b = Math.random();
+    for (i = 0; i < arrSize / 2; i++) {
+        string += r + " " + g + " " + b + " ";
+    }
+    result = string.split(' ');
+    return result;
+}
 
 let Triangle = function () {
     let canvas = document.getElementById('main-canvas');
@@ -60,6 +80,8 @@ let Triangle = function () {
         0.25, 0.25,
     ]
 
+    let colors = Generate(triangleVert.length);
+
     const triangleVertexBufferObject = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, triangleVertexBufferObject);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVert), gl.STATIC_DRAW); // since everything in JS is 64 bit floating point we need to convert to 32 bits
@@ -75,7 +97,24 @@ let Triangle = function () {
         0,
     );
 
+
+    const colorAttrLocation = gl.getAttribLocation(program, 'vertColor');
+    const colorBufferObject = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBufferObject);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(
+        colorAttrLocation,
+        3,
+        gl.FLOAT,
+        gl.FALSE,
+        0,
+        0
+    );
+
+
+
     gl.enableVertexAttribArray(posAttrLocation);
+    gl.enableVertexAttribArray(colorAttrLocation);
 
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
