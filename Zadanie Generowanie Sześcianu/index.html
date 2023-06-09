@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8" />
+  <title>My test page</title>
+  <style>
+    p,
+    span,
+    label {
+      font: 1rem 'Fira Sans', sans-serif;
+    }
+
+    input {
+      margin: 0.4rem;
+    }
+
+    /* canvas {
+      display: none;
+    } */
+
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="form">
+    <br>
+    <label>Podaj rozmiar sześcianu:</label>
+    <input type="range" min="10" max="200" id="rozmiar" name="rozmiar"><br><br><br>
+    <label>Podaj kolory pierwszej ściany:</label><br>
+    <span>R: </span>
+    <input value="255" type="number" min="0" max="255" id="r1" name="r1">
+    <span>G: </span>
+    <input value="0" type="number" min="0" max="255" id="g1" name="g1">
+    <span>B: </span>
+    <input value="0" type="number" min="0" max="255" id="b1" name="b1"><br><br>
+
+    <label>Podaj kolory drugiej ściany:</label><br>
+    <span>R: </span>
+    <input value="0" type="number" min="0" max="255" id="r2" name="r2">
+    <span>G: </span>
+    <input value="255" type="number" min="0" max="255" id="g2" name="g2">
+    <span>B: </span>
+    <input value="0" type="number" min="0" max="255" id="b2" name="b2"><br><br>
+
+    <label>Podaj kolory trzeciej ściany:</label><br>
+    <span>R: </span>
+    <input value="0" type="number" min="0" max="255" id="r3" name="r3">
+    <span>G: </span>
+    <input value="0" type="number" min="0" max="255" id="g3" name="g3">
+    <span>B: </span>
+    <input value="255" type="number" min="0" max="255" id="b3" name="b3"><br><br>
+
+    <div><button id="button" onclick="Generate();">Zatwierdź</button></div>
+  </div>
+  <canvas id="main-canvas" width="800" height="800"></canvas>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/gl-matrix@3/gl-matrix.js"></script>
+<script src="script.js"></script>
+
+</html>
