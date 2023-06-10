@@ -230,7 +230,7 @@ let Triangle = function (rozmiar, kolory) {
         3,
         gl.FLOAT,
         gl.FALSE,
-        3 * Float32Array.BYTES_PER_ELEMENT,
+        0,
         0,
     );
 
