@@ -214,6 +214,8 @@ class World {
         requestAnimationFrame(this.loop);
     }
 
+    // Ten loop nie działa bo nie umiem wymyślić co zrobić żeby działało
+
     loop = function () {
         return function () {
             this.#angle = performance.now() / 1000 / 8 * 2 * Math.PI;
